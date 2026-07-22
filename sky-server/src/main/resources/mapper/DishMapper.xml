@@ -8,6 +8,23 @@
         insert into dish (category_id, name, image, price, description, status, create_time, update_time,create_user,update_user)
         values (#{categoryId}, #{name}, #{image}, #{price}, #{description}, #{status}, #{createTime}, #{updateTime},#{createUser},#{updateUser})
     </insert>
+
+    <!--    根据菜品id修改菜品基本信息 -->
+    <update id="updateById">
+        update dish
+        <set>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+        </set>
+        where id = #{id}
+    </update>
+
     <!-- 批量删除菜品 -->
     <delete id="deleteBatch">
         delete from dish where id in
