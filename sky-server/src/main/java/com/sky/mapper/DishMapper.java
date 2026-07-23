@@ -11,6 +11,7 @@ import lombok.Data;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -67,4 +68,6 @@ public interface DishMapper {
      */
     @AutoFill(OperationType.UPDATE)
     void updateById(Dish dish);
+
+
 }
