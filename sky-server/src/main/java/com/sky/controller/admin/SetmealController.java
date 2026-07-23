@@ -13,6 +13,8 @@ import com.sky.service.SetmealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/setmeal")
 @Slf4j
@@ -49,6 +51,18 @@ public class SetmealController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 批量删除套餐
+     * @param ids
+     * @return
+     */
+    @ApiOperation("批量删除套餐")
+    @DeleteMapping
+    public Result delete(@RequestParam List<Long> ids) {
+        log.info("批量删除套餐：{}", ids);
+        setmealService.delete(ids);
+        return Result.success();
+    }
 
 
 

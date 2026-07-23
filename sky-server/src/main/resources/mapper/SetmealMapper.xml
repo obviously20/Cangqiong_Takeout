@@ -8,6 +8,14 @@
         values (#{id},#{categoryId},#{description},#{image},#{name},#{price},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})
     </insert>
 
+    <!-- 批量删除套餐 -->
+    <delete id="deleteSetmealByIds">
+        delete from setmeal where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
     <!-- 套餐分页查询 -->
     <select id="page" resultType="com.sky.vo.SetmealVO">
         select s.*,c.name as categoryName from setmeal s left join category c on s.category_id = c.id
