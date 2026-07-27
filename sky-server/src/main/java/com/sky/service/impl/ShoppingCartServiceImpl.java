@@ -28,6 +28,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     private SetmealMapper setmealMapper;
 
+    /**
+     * 新增购物车
+     * @param shoppingCartDTO
+     */
     @Override
     public void add(ShoppingCartDTO shoppingCartDTO) {
         // 新增购物车逻辑
@@ -72,10 +76,23 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     }
 
+    /**
+     * 查询购物车列表
+     * @return
+     */
     @Override
     public List<ShoppingCart> list() {
         Long userId = BaseContext.getCurrentId();
         ShoppingCart shoppingCart = new ShoppingCart().builder().userId(userId).build();
         return shoppingCartMapper.list(shoppingCart);
+    }
+
+    /**
+     * 清空购物车
+     */
+    @Override
+    public void clean() {
+        Long userId = BaseContext.getCurrentId();
+        shoppingCartMapper.deleteByUserId(userId);
     }
 }
