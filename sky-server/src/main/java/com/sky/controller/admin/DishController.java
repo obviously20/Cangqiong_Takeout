@@ -11,9 +11,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 菜品管理
@@ -26,6 +28,8 @@ public class DishController {
 
    @Autowired
    private DishService dishService;
+   @Autowired
+   private RedisTemplate redisTemplate;
 
    /**
     * 新增菜品
@@ -39,6 +43,11 @@ public class DishController {
       log.info("新增菜品：{}", dishDTO);
       //调用服务层新增菜品
       dishService.savewithFlavor(dishDTO);
+
+      //新增完菜品后清除缓存，以防数据库和redis缓存数据信息不匹配
+      String key = "dish_" + dishDTO.getCategoryId();
+      cleanCache(key);
+
       return Result.success();
 
    }
@@ -68,6 +77,10 @@ public class DishController {
       log.info("删除菜品：{}", ids);
       //调用服务层删除菜品
       dishService.delete(ids);
+
+      //清除缓存
+      cleanCache("dish_*");
+
       return Result.success();
    }
 
@@ -96,6 +109,10 @@ public class DishController {
       log.info("修改菜品：{}", dishDTO);
       //调用服务层修改菜品
       dishService.updateWithFlavor(dishDTO);
+
+      //清除缓存
+      cleanCache("dish_*");
+
       return Result.success();
    }
 
@@ -110,6 +127,10 @@ public class DishController {
    public Result startOrStop(@PathVariable Integer status,Long id){
       log.info("启用/停用菜品id:{},状态:{}", id, status);
       dishService.statusStartOrStop(id,status);
+
+      //清除缓存
+      cleanCache("dish_*");
+
       return Result.success();
    }
 
@@ -125,6 +146,15 @@ public class DishController {
       //调用服务层根据分类id查询菜品
       List<Dish> dishList = dishService.listByCategoryId(categoryId);
       return Result.success(dishList);
+   }
+
+   /**
+    * 清楚缓存
+    * @param pattern
+    */
+   private void cleanCache(String pattern){
+      Set keys = redisTemplate.keys(pattern);
+      redisTemplate.delete(keys);
    }
 
 }
