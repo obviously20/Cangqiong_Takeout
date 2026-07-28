@@ -67,4 +67,19 @@ sky:
   wechat:
     appid: ${sky.wechat.appid}
     secret: ${sky.wechat.secret}
+#    # 微信支付配置
+#    # 商户号
+#    mchid: ${sky.wechat.mchid}
+#    # 商户证书序列号
+#    mchSerialNo: ${sky.wechat.mchSerialNo}
+#    # 商户私钥文件路径
+#    privateKeyFilePath: ${sky.wechat.privateKeyFilePath}
+#    # APIV3密钥，用于签名验证，用来验证支付通知是否来自微信
+#    apiV3Key: ${sky.wechat.apiV3Key}
+#    # 微信支付证书文件路径
+#    weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
+#    # 支付通知回调地址，微信会将支付通知发送到该地址
+#    notifyUrl: ${sky.wechat.notifyUrl}
+#    # 退款通知回调地址，微信会将退款通知发送到该地址
+#    refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
 
