@@ -74,4 +74,31 @@ public class OrderController {
         return Result.success(orderVO);
     }
 
+    /**
+     * 取消订单
+     * @param id
+     * @return
+     */
+    @ApiOperation("取消订单")
+    @PutMapping("/cancel/{id}")
+    public Result cancelOrder(@PathVariable Long id) throws Exception {
+        log.info("取消订单,订单id：{}", id);
+        orderService.cancelOrder(id);
+        return Result.success();
+    }
+
+    /**
+     * 再来一单
+     * @param id
+     * @return
+     */
+    @ApiOperation("再来一单")
+    @PostMapping("/repetition/{id}")
+    public Result repetitionOrder(@PathVariable Long id){
+        log.info("再来一单,订单id：{}", id);
+        orderService.repetitionOrder(id);
+        return Result.success();
+    }
+
+
 }

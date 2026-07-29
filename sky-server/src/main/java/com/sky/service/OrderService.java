@@ -44,4 +44,16 @@ public interface OrderService {
      * @return
      */
     OrderVO getOrderDetail(Long id);
+
+    /**
+     * 取消订单
+     * @param id
+     */
+    void cancelOrder(Long id) throws Exception;
+
+    /**
+     * 再来一单
+     * @param id
+     */
+    void repetitionOrder(Long id);
 }
