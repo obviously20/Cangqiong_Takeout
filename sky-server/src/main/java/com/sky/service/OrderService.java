@@ -1,7 +1,9 @@
 package com.sky.service;
 
+import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
+import com.sky.result.PageResult;
 import com.sky.vo.OrderPaymentVO;
 import com.sky.vo.OrderSubmitVO;
 
@@ -27,4 +29,11 @@ public interface OrderService {
      * @param outTradeNo
      */
     void paySuccess(String outTradeNo);
+
+    /**
+     * 查询用户订单列表
+     * @param ordersPageQueryDTO
+     * @return
+     */
+    PageResult historyOrdersPage(OrdersPageQueryDTO ordersPageQueryDTO);
 }
