@@ -118,6 +118,18 @@ public class OrderController {
     }
 
 
+    /**
+     * 完成订单
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "完成订单")
+    @PutMapping("/complete/{id}")
+    public Result completeOrder(@PathVariable Long id) {
+        log.info("完成订单，订单id：{}", id);
+        orderService.completeOrder(id);
+        return Result.success();
+    }
 
 
 
