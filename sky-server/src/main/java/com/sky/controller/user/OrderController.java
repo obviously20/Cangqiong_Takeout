@@ -24,6 +24,11 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * 用户下单
+     * @param ordersSubmitDTO
+     * @return
+     */
     @ApiOperation(value = "用户下单")
     @PostMapping("/submit")
     public Result<OrderSubmitVO> submitOrder(@RequestBody OrdersSubmitDTO ordersSubmitDTO) {
