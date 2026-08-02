@@ -9,4 +9,17 @@
         values (#{openid}, #{name}, #{phone}, #{sex}, #{idNumber}, #{avatar}, #{createTime})
     </insert>
 
+    <!--    查询用户总量统计 -->
+    <select id="userSumByMap" resultType="java.lang.Integer">
+        select count(id) from user
+        <where>
+            <if test="map.beginTime != null">
+                and create_time &gt;= #{map.beginTime}
+            </if>
+            <if test="map.endTime != null">
+                and create_time &lt;= #{map.endTime}
+            </if>
+        </where>
+    </select>
+
 </mapper>

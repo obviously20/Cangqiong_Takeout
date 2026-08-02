@@ -89,15 +89,19 @@
         </where>
     </select>
 
-    <!--    查询用户总量统计 -->
-    <select id="userSumByMap" resultType="java.lang.Integer">
-        select count(id) from user
+
+    <!--    查询订单总量统计 -->
+    <select id="orderSumByMap" resultType="java.lang.Integer">
+        select count(id) from orders
         <where>
             <if test="map.beginTime != null">
-                and create_time &gt;= #{map.beginTime}
+                and order_time &gt;= #{map.beginTime}
             </if>
             <if test="map.endTime != null">
-                and create_time &lt;= #{map.endTime}
+                and order_time &lt;= #{map.endTime}
+            </if>
+            <if test="map.status != null">
+                and status = #{map.status}
             </if>
         </where>
     </select>
