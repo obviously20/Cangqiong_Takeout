@@ -4,10 +4,12 @@ import com.github.pagehelper.Page;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -61,4 +63,11 @@ public interface OrderMapper {
      */
     @Select("select * from orders where status = #{status} and orders.order_time < #{time}")
     List<Orders> selectByStatusAndCreateTimeTL(Integer status, LocalDateTime time);
+
+    /**
+     * 查询营业额统计
+     * @param map
+     * @return
+     */
+    Double getTurnoverByMap(@Param("map") Map map);
 }

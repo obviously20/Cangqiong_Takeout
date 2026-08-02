@@ -73,4 +73,21 @@
     </select>
 
 
+<!--    查询营业额统计 -->
+    <select id="getTurnoverByMap" resultType="java.lang.Double">
+        select sum(amount) from orders
+        <where>
+            <if test="map.beginDate != null">
+                and order_time &gt;= #{map.beginDate}
+            </if>
+            <if test="map.endDate != null">
+                and order_time &lt;= #{map.endDate}
+            </if>
+            <if test="map.status != null">
+                and status = #{map.status}
+            </if>
+        </where>
+    </select>
+
+
 </mapper>
