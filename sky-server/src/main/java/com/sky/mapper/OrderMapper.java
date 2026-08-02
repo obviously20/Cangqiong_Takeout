@@ -70,4 +70,11 @@ public interface OrderMapper {
      * @return
      */
     Double getTurnoverByMap(@Param("map") Map map);
+
+    /**
+     * 查询用户总量统计
+     * @param map
+     * @return
+     */
+    Integer userSumByMap(@Param("map") Map map);
 }
